@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-main.html">Dashboard</a></li>
+            <li><a href="browse-products.html">Browse Products</a></li>
+            <li><a href="subscriptions.html">My Subscriptions</a></li>
+            <li><a href="order-history.html">Order History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <h2>User Profile</h2>
+        <form id="profile-form">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required>
+
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" readonly>
+
+            <label for="phone-number">Phone Number:</label>
+            <input type="tel" id="phone-number" name="phone-number">
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
+
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const userProfile = {
+            firstName: "Ankush",
+            lastName: "Maity",
+            email: "ankush@hsbc.com",
+            phoneNumber: "+1234567890",
+            address: "Yerwada, Pune 411014"
+        };
+
+        function loadUserProfile() {
+            document.getElementById('first-name').value = userProfile.firstName;
+            document.getElementById('last-name').value = userProfile.lastName;
+            document.getElementById('email').value = userProfile.email;
+            document.getElementById('phone-number').value = userProfile.phoneNumber;
+            document.getElementById('address').value = userProfile.address;
+        }
+
+        function saveChanges(event) {
+            event.preventDefault();
+            
+            alert("Profile changes saved successfully!");
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+
+        document.getElementById('profile-form').addEventListener('submit', saveChanges);
+        window.onload = loadUserProfile;
+    </script>
+</body>
+</html>

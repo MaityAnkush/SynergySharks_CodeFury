@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-main.html">Dashboard</a></li>
+            <li><a href="browse-products.html">Browse Products</a></li>
+            <li><a href="subscriptions.html">My Subscriptions</a></li>
+            <li><a href="order-history.html">Order History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Checkout Section -->
+    <section class="checkout">
+        <h2>Checkout</h2>
+        <table class="checkout-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="checkout-items">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="total-label">Grand Total:</td>
+                    <td id="grand-total">$0.00</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="checkout-buttons">
+            <button onclick="updateCart()">Update Cart</button>
+            <button onclick="proceedToPayment()">Proceed to Payment</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const cartItems = [
+            { name: "Organic Apples", quantity: 2, price: 120},
+            { name: "Bananas", quantity: 3, price: 60 },
+            { name: "Almond Butter", quantity: 1, price: 300 }
+        ];
+
+        function loadCheckoutItems() {
+            const checkoutItemsContainer = document.getElementById('checkout-items');
+            let grandTotal = 0;
+
+            cartItems.forEach(item => {
+                const total = item.quantity * item.price;
+                grandTotal += total;
+
+                const row = `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td><input type="number" value="${item.quantity}" min="1" data-name="${item.name}" onchange="updateQuantity(this)"></td>
+                        <td>Rs ${item.price.toFixed(2)}</td>
+                        <td>Rs ${total.toFixed(2)}</td>
+                    </tr>
+                `;
+
+                checkoutItemsContainer.insertAdjacentHTML('beforeend', row);
+            });
+
+            document.getElementById('grand-total').textContent = `Rs ${grandTotal.toFixed(2)}`;
+        }
+
+        function updateQuantity(input) {
+            const itemName = input.getAttribute('data-name');
+            const newQuantity = parseInt(input.value);
+            const item = cartItems.find(i => i.name === itemName);
+            item.quantity = newQuantity;
+
+            loadCheckoutItems(); // Reload the table with updated quantities
+        }
+
+        function updateCart() {
+            alert("Cart updated successfully!");
+        }
+
+        function proceedToPayment() {
+            alert("Proceeding to payment...");
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+
+        window.onload = loadCheckoutItems;
+    </script>
+</body>
+</html>

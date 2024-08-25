@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage User Subscriptions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>Admin Panel</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="admin-main.html">Dashboard</a></li>
+            
+            <li><a href="manage-products2.html">Manage Products</a></li>
+            <li><a href="manage-users.html">View Users</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Manage Users Section -->
+    <section class="manage-users">
+        <h2>Manage User Subscriptions</h2>
+        <table class="user-subscriptions-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Subscription ID</th>
+                    <th>User Name</th>
+                    <th>Product Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="user-subscriptions-list">
+                <!-- User subscription items will be populated here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const userSubscriptions = [
+            { userId: 1, subscriptionId: 101, userName: "Ankush Maity", productName: "Organic Apples", startDate: "2024-08-01", endDate: "2024-09-01" },
+            { userId: 2, subscriptionId: 102, userName: "Omkar", productName: "Bananas", startDate: "2024-08-05", endDate: "2024-09-05" },
+            { userId: 3, subscriptionId: 103, userName: "Tanmay", productName: "Almond Butter", startDate: "2024-08-10", endDate: "2024-09-10" }
+        ];
+
+        function loadUserSubscriptions() {
+            const userSubscriptionsList = document.getElementById('user-subscriptions-list');
+
+            userSubscriptions.forEach(subscription => {
+                const row = `
+                    <tr>
+                        <td>${subscription.userId}</td>
+                        <td>${subscription.subscriptionId}</td>
+                        <td>${subscription.userName}</td>
+                        <td>${subscription.productName}</td>
+                        <td>${subscription.startDate}</td>
+                        <td>${subscription.endDate}</td>
+                        <td><button class="cancel-button" onclick="cancelSubscription(${subscription.subscriptionId})">Cancel Subscription</button></td>
+                    </tr>
+                `;
+
+                userSubscriptionsList.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function cancelSubscription(subscriptionId) {
+            const confirmation = confirm("Are you sure you want to cancel this subscription?");
+            if (confirmation) {
+                
+                const subscriptionIndex = userSubscriptions.findIndex(sub => sub.subscriptionId === subscriptionId);
+                if (subscriptionIndex !== -1) {
+                    userSubscriptions.splice(subscriptionIndex, 1);
+                    document.getElementById('user-subscriptions-list').innerHTML = '';
+                    loadUserSubscriptions();
+                    alert("Subscription cancelled successfully!");
+                }
+            }
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+
+        window.onload = loadUserSubscriptions;
+    </script>
+</body>
+</html>

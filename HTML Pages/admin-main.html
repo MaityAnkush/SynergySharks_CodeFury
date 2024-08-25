@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>Admin Panel</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="admin-main.html">Dashboard</a></li>
+            <li><a href="manage-products.html">Manage Products</a></li>
+            <li><a href="admin-manageusers.html">Manage Subscriptions</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Admin Dashboard Section -->
+    <section class="admin-dashboard">
+        <h2>Welcome, Admin</h2>
+        <div class="admin-actions">
+            <a href="manage-products2.html" class="admin-action-link">Modify Products</a>
+            <a href="add-product.html" class="admin-action-link">Add New Product</a>
+            <a href="manage-subscriptions.html" class="admin-action-link">Change Subscription Types</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+    </script>
+</body>
+</html>

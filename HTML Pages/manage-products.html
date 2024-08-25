@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>Admin Panel</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="admin-main.html">Dashboard</a></li>
+            <li><a href="manage-products.html">Manage Products</a></li>
+            <li><a href="admin-manageusers.html">Manage Subscriptions</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Manage Products Section -->
+    <section class="manage-products">
+        <h2>Manage Products</h2>
+        <div class="product-list">
+            <!-- Sample Product Modification Form -->
+            <div class="product-item">
+                <h3>Organic Apples</h3>
+                <img src="images/apple.jpeg" alt="Apple">
+                <p>Current Price:Rs 120/KG</p>
+                <label for="apple-price">New Price:</label>
+                <input type="number" id="apple-price" name="apple-price" step="0.01">
+                <button onclick="updateProduct('Organic Apples', document.getElementById('apple-price').value)">Update Price</button>
+            </div>
+            
+        </div>
+    </section>
+
+    <script>
+        function updateProduct(productName, newPrice) {
+            
+            alert(productName + " price updated to Rs" + newPrice);
+            
+        }
+    </script>
+</body>
+</html>

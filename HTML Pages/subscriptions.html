@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Subscriptions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-main.html">Dashboard</a></li>
+            <li><a href="browse-products.html">Browse Products</a></li>
+            <li><a href="subscriptions.html">My Subscriptions</a></li>
+            <li><a href="order-history.html">Order History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Subscriptions Section -->
+    <section class="subscriptions">
+        <h2>My Subscriptions</h2>
+        <table class="subscriptions-table">
+            <thead>
+                <tr>
+                    <th>Subscription ID</th>
+                    <th>Product Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="subscription-list">
+                <!-- Subscription items will be populated here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const subscriptions = [
+            { id: 101, productName: "Organic Apples", startDate: "2024-08-01", endDate: "2024-09-01" },
+            { id: 102, productName: "Bananas", startDate: "2024-08-05", endDate: "2024-09-05" },
+            { id: 103, productName: "Almond Butter", startDate: "2024-08-10", endDate: "2024-09-10" }
+        ];
+
+        function loadSubscriptions() {
+            const subscriptionListContainer = document.getElementById('subscription-list');
+
+            subscriptions.forEach(subscription => {
+                const row = `
+                    <tr>
+                        <td>${subscription.id}</td>
+                        <td>${subscription.productName}</td>
+                        <td>${subscription.startDate}</td>
+                        <td>${subscription.endDate}</td>
+                        <td><button class="cancel-button" onclick="cancelSubscription(${subscription.id})">Cancel</button></td>
+                    </tr>
+                `;
+
+                subscriptionListContainer.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function cancelSubscription(subscriptionId) {
+            const confirmation = confirm("Are you sure you want to cancel this subscription?");
+            if (confirmation) {
+             
+                const subscriptionIndex = subscriptions.findIndex(sub => sub.id === subscriptionId);
+                if (subscriptionIndex !== -1) {
+                    subscriptions.splice(subscriptionIndex, 1);
+                    document.getElementById('subscription-list').innerHTML = '';
+                    loadSubscriptions();
+                    alert("Subscription cancelled successfully!");
+                }
+            }
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+
+        window.onload = loadSubscriptions;
+    </script>
+</body>
+</html>

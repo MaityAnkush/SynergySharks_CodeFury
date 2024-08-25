@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-main.html">Dashboard</a></li>
+            <li><a href="browse-products.html">Browse Products</a></li>
+            <li><a href="subscriptions.html">My Subscriptions</a></li>
+            <li><a href="order-history.html">Order History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- Order History Section -->
+    <section class="order-history">
+        <h2>Order History</h2>
+        <div id="orders-container">
+            <!-- Orders will be populated here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: info@myshop.com | +123 456 7890</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const orders = [
+            {
+                orderId: 201,
+                products: [
+                    { name: "Organic Apples", quantity: 2 },
+                    { name: "Bananas", quantity: 1 }
+                ],
+                totalPrice: 300,
+                orderDate: "2024-08-01"
+            },
+            {
+                orderId: 202,
+                products: [
+                    { name: "Almond Butter", quantity: 1 }
+                ],
+                totalPrice: 800,
+                orderDate: "2024-08-10"
+            }
+        ];
+
+        function loadOrderHistory() {
+            const ordersContainer = document.getElementById('orders-container');
+
+            orders.forEach(order => {
+                let productDetails = '';
+                order.products.forEach(product => {
+                    productDetails += `<li>${product.name} - Quantity: ${product.quantity}</li>`;
+                });
+
+                const orderBlock = `
+                    <div class="order-block">
+                        <h3>Order ID: ${order.orderId}</h3>
+                        <ul class="product-list">
+                            ${productDetails}
+                        </ul>
+                        <p><strong>Total Price:</strong> Rs ${order.totalPrice.toFixed(2)}</p>
+                        <p><strong>Order Date:</strong> ${order.orderDate}</p>
+                    </div>
+                `;
+
+                ordersContainer.insertAdjacentHTML('beforeend', orderBlock);
+            });
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "index.html"; // Redirect to home or login page
+        }
+
+        window.onload = loadOrderHistory;
+    </script>
+</body>
+</html>
